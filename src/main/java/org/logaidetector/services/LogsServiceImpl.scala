@@ -9,6 +9,10 @@ class LogsServiceImpl(@Autowired logsRepo: LogRepository) extends LogsService {
 
   override def addLog(log: Log): Long =
   {
+    if (log.getLogContent.isBlank)
+    {
+      throw new Exception("Cannot add an empty log")
+    }
     logsRepo.save(log)
     log.getId
   }
